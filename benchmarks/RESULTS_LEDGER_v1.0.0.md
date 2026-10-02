@@ -56,3 +56,23 @@ Stage 4A: mutation/handoff/incomplete-state preservation under equal
 instrumentation.
 
 No Stage 4A result is claimed in this ledger until executed.
+
+
+## Stage 4A — mutation/handoff preservation
+
+- Registered mutation families: 6.
+- Governed full-state envelope, single handoff: **6/6 required decisions preserved**.
+- Governed full-state envelope, 20 handoffs: **6/6 required decisions preserved**.
+- Negative controls: **100/100 stable**.
+- Disposition: **BOUNDARY RESULT**. Carrying decision-relevant state preserves
+  decision specificity; lossy answer-centric transfer does not. This is not
+  LM-specific because an equivalently instrumented conventional typed envelope
+  can preserve the same state.
+
+### Updated surviving frontier
+
+The next test is Stage 4B: LM governed state/receipt versus a strong conventional
+typed envelope under equal instrumentation, with controlled omission,
+invalidation, retraction, authority-scope change and reconstruction. A favorable
+LM-specific result requires a reproducible loss/detection distinction that cannot
+be explained by unequal information.
