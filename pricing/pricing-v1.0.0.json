@@ -1,0 +1,48 @@
+{
+  "pricing_version": "1.0.0",
+  "currency_display": "USD",
+  "primary_asset": "USDC",
+  "primary_network": "Base mainnet",
+  "production_settlement": "DISABLED_PENDING_VERIFIED_RECEIVER",
+  "operations": {
+    "stabilize": {
+      "price_usd": 0.08,
+      "class": "MICRO"
+    },
+    "preflight": {
+      "price_usd": 0.2,
+      "class": "MICRO"
+    },
+    "consume": {
+      "base_price_usd": 0.5,
+      "class": "MICRO_OR_HIGHER",
+      "variable": true
+    },
+    "challenge": {
+      "price_usd": 0.35,
+      "class": "MICRO"
+    },
+    "close": {
+      "price_usd": 0.25,
+      "class": "MICRO"
+    }
+  },
+  "classes": {
+    "MICRO": {
+      "min_usd": 0.08,
+      "max_usd": 0.5
+    },
+    "STANDARD": {
+      "min_usd": 1,
+      "max_usd": 10
+    },
+    "PROTECTED": {
+      "min_usd": 10,
+      "max_usd": 100
+    },
+    "HUMAN_DESIGN_PARTNER": {
+      "pricing": "SEPARATELY_CONTRACTED"
+    }
+  },
+  "invariant": "Payment purchases declared computation/service only; never truth, verification, certification, authority, canonical status, admission, or favorable outcome."
+}
