@@ -1,0 +1,92 @@
+{
+  "benchmark_id": "LM-AGENT-SERVICE-001-BENCH-v1.0.0",
+  "status": "FROZEN_PRE_EXTERNAL_COHORT",
+  "frozen_date": "2026-10-01",
+  "service_version": "1.0.0",
+  "decisions": [
+    "ALLOW",
+    "REVIEW",
+    "REFUSE",
+    "STALE",
+    "UNRESOLVED"
+  ],
+  "fields": [
+    "provenance",
+    "evidence",
+    "dependencies",
+    "authority",
+    "currentness",
+    "unresolved_obligations",
+    "intended_operation"
+  ],
+  "comparator_policy": {
+    "information_parity": true,
+    "capability_parity": true,
+    "lm_native_labels_required": false,
+    "preserve_null_adverse_results": true,
+    "post_result_rule_changes": "NEW_VERSION_REQUIRED"
+  },
+  "stage1a": {
+    "cases": 10,
+    "class": "contract_smoke"
+  },
+  "stage2a": {
+    "state_domains": {
+      "evidence": [
+        "TRUE",
+        "FALSE",
+        "UNKNOWN"
+      ],
+      "dependency": [
+        "TRUE",
+        "FALSE",
+        "UNKNOWN"
+      ],
+      "authority": [
+        "TRUE",
+        "FALSE",
+        "UNKNOWN"
+      ],
+      "currentness": [
+        "TRUE",
+        "FALSE",
+        "UNKNOWN"
+      ],
+      "unresolved": [
+        false,
+        true
+      ],
+      "operation_declared": [
+        false,
+        true
+      ]
+    },
+    "exhaustive_cases": 324
+  },
+  "stage3a": {
+    "field_families": [
+      "evidence",
+      "dependency",
+      "authority",
+      "currentness",
+      "unresolved_obligations"
+    ],
+    "paired_worlds_per_family": 100,
+    "total_paired_worlds": 500,
+    "negative_controls": 100
+  },
+  "external_metrics": [
+    "paid_inspections",
+    "repeat_agents",
+    "cost_per_inspection",
+    "actionable_reliance_distinctions",
+    "false_allow_rate",
+    "false_refuse_rate",
+    "latency",
+    "contribution_rate",
+    "accepted_useful_contributions",
+    "CAR",
+    "RIR"
+  ],
+  "production_claims_allowed": false
+}
