@@ -105,3 +105,34 @@ provenance, authority/currentness or unresolved-obligation relations are indirec
 rather than directly supplied. Both must construct the reliance-relevant state
 using fair ordinary capabilities. Scoring is frozen before outputs and checked
 for representation leakage.
+
+
+## Stage 4C — derived-state discovery under information parity
+
+Two indirect source-corpus cases were registered without directly supplying the
+target reliance label:
+
+- supersession reached through task → claim → document → source → superseding
+  source, requiring STALE;
+- unresolved dependency reached through task → claim → document, requiring
+  UNRESOLVED.
+
+Results:
+- LM expected decisions: **2/2**
+- conventional graph/rule expected decisions: **2/2**
+- agreement: **2/2**
+- LM-specific recovered relations: **0**
+
+Disposition: **NULL.**
+
+Ordinary multi-hop graph traversal and explicit rule evaluation are subtracted
+from the eligible LM-specific explanation.
+
+### Stage 4D frontier
+
+Further differentiation testing must target semantic dependency formation or
+obligation preservation under transformation: bounded-universe negative/frontier
+dependencies, authority/evidence interaction, unresolved-obligation transfer,
+selective retraction/re-derivation, and projection after composition. Strong
+comparators receive the same source corpus, universe, rules/policies and update
+stream.
