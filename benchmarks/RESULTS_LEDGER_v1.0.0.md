@@ -76,3 +76,32 @@ typed envelope under equal instrumentation, with controlled omission,
 invalidation, retraction, authority-scope change and reconstruction. A favorable
 LM-specific result requires a reproducible loss/detection distinction that cannot
 be explained by unequal information.
+
+
+## Stage 4B — equal-instrumentation governed envelope comparator
+
+Registered sequences: 10, covering omission, invalidation, retraction, scope
+change, stale state, provenance loss, unresolved state, and three reconstruction
+paths.
+
+- Immediate LM expected decisions: **10/10**
+- Immediate conventional expected decisions: **10/10**
+- Immediate agreement: **10/10**
+- After 20 typed-state handoffs, LM: **10/10**
+- After 20 typed-state handoffs, conventional: **10/10**
+- After 20 handoffs, agreement: **10/10**
+- LM-specific advantage observed: **0 cases**
+
+Disposition: **NULL under information/capability parity.**
+
+This subtracts simple typed-state preservation, explicit update handling and
+explicit restoration/reconstruction from the eligible LM-specific explanation.
+
+### Stage 4C registered frontier
+
+The next eligible differentiation test moves from supplied state to derived
+state. Both systems receive a common source corpus in which target dependency,
+provenance, authority/currentness or unresolved-obligation relations are indirect
+rather than directly supplied. Both must construct the reliance-relevant state
+using fair ordinary capabilities. Scoring is frozen before outputs and checked
+for representation leakage.
