@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:lightmathematics:agent-service:reliance-response:1.0.0",
+  "title": "LM-AGENT-SERVICE-001 Reliance Response",
+  "type": "object",
+  "required": [
+    "service",
+    "service_version",
+    "decision",
+    "operation",
+    "receipt_id",
+    "timestamp"
+  ],
+  "properties": {
+    "service": {
+      "const": "LM-AGENT-SERVICE-001"
+    },
+    "service_version": {
+      "const": "1.0.0"
+    },
+    "decision": {
+      "enum": [
+        "ALLOW",
+        "REVIEW",
+        "REFUSE",
+        "STALE",
+        "UNRESOLVED"
+      ]
+    },
+    "operation": {
+      "type": "string"
+    },
+    "object": {},
+    "provenance": {
+      "type": "array"
+    },
+    "dependencies": {
+      "type": "array"
+    },
+    "authority": {
+      "type": "object"
+    },
+    "currentness": {
+      "type": "object"
+    },
+    "unresolved_obligations": {
+      "type": "array"
+    },
+    "evidence": {
+      "type": "array"
+    },
+    "source_versions": {
+      "type": "array"
+    },
+    "reliance_scope": {
+      "type": "string"
+    },
+    "limitations": {
+      "type": "array"
+    },
+    "receipt_id": {
+      "type": "string"
+    },
+    "pricing_version": {
+      "type": "string"
+    },
+    "paid_amount": {},
+    "timestamp": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}
