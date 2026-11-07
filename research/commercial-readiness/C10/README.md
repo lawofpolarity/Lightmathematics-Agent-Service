@@ -1,0 +1,7 @@
+# C10 experimental receipt boundary (nonproduction)
+
+Run `cd research/commercial-readiness/C10 && python -m unittest discover -v -p 'test_*.py'`.
+
+This is an isolated experimental adapter, not the frozen v1.0.0 service contract. The `verify_signature`, `authenticate`, `authorize`, and `current` callbacks MUST be supplied by independently trusted implementations. The unit-test callbacks are synthetic and deliberately **do not** implement cryptographic verification. A passing synthetic ALLOW is **not** production authorization, signed evidence, or canonical admission. The currentness callback must implement coherent commit-ordering and authoritative dependency coverage; a Boolean mock does not prove these properties. Evidence JSON canonicalization here is provisional and must be replaced by a ratified interoperable canonicalization contract before real signatures are accepted. Caller identity must be cryptographically bound to the request by an authenticated transport; the request's caller string alone is untrusted. All canonical admissions remain G4 CLOSED and SPEC_BLOCKED.
+
+Required before integration: verified Ed25519 (or approved equivalent) implementation, trusted key registry/revocation, authenticated caller transport, exact operation and scope authorization, replay/expiry protection, dependency-token ordering, independent adversarial tests, and an approved versioned contract. No payment, production, or protected-branch changes.
