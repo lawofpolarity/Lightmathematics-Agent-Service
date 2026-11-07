@@ -5,19 +5,25 @@ import json
 def canonical(value):
     return json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
 
+def _identifier(value):
+    """Reject ambiguous/non-text identifiers before invoking trusted callbacks."""
+    return (type(value) is str and 0 < len(value) <= 512
+            and not any(ord(char) < 32 or ord(char) == 127 for char in value))
+
 def verify(request, receipt, *, authenticate, authorize, verify_signature, current):
     denied = {'decision': 'REFUSE', 'authenticated_reliance': False}
     if not isinstance(request, dict) or not isinstance(receipt, dict):
         return denied
     try:
         required = ('caller', 'operation', 'scope', 'evidence', 'dependency_token')
-        if any(not request.get(k) for k in required):
+        if any(not _identifier(request.get(k)) for k in ('caller', 'operation', 'scope', 'dependency_token')) or 'evidence' not in request:
             return denied
-        if any(receipt.get(k) != request[k] for k in ('caller', 'operation', 'scope', 'dependency_token')):
+        if any(not _identifier(receipt.get(k)) or receipt[k] != request[k] for k in ('caller', 'operation', 'scope', 'dependency_token')):
             return denied
         if receipt.get('evidence_sha256') != hashlib.sha256(canonical(request['evidence'])).hexdigest():
             return denied
-        if receipt.get('decision') != 'ALLOW' or receipt.get('canonical_admission') is not False:
+        if (receipt.get('decision') != 'ALLOW' or receipt.get('canonical_admission') is not False
+                or not _identifier(receipt.get('signature'))):
             return denied
         if authenticate(request['caller']) is not True:
             return denied
