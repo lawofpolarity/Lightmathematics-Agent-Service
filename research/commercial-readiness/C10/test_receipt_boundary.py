@@ -59,4 +59,34 @@ class BoundaryTests(unittest.TestCase):
                 self.callbacks['current'] = lambda t, v=value: v
                 self.check('STALE')
 
+
+    def test_ambiguous_request_identifiers_fail_closed(self):
+        for field in ('caller', 'operation', 'scope', 'dependency_token'):
+            for value in (True, 1, ['agent-1'], {'id': 'agent-1'}, 'x\\n', 'x' * 513):
+                with self.subTest(field=field, value=repr(value)):
+                    original = self.req[field]
+                    self.req[field] = value
+                    try:
+                        self.check()
+                    finally:
+                        self.req[field] = original
+
+    def test_ambiguous_receipt_identifiers_fail_closed(self):
+        for field in ('caller', 'operation', 'scope', 'dependency_token', 'signature'):
+            for value in (True, 1, ['agent-1'], {'id': 'agent-1'}, 'x\\r', 'x' * 513):
+                with self.subTest(field=field, value=repr(value)):
+                    original = self.receipt[field]
+                    self.receipt[field] = value
+                    try:
+                        self.check()
+                    finally:
+                        self.receipt[field] = original
+
+    def test_empty_evidence_remains_distinct_from_missing_evidence(self):
+        self.req['evidence'] = {}
+        self.receipt['evidence_sha256'] = hashlib.sha256(canonical({})).hexdigest()
+        self.check('ALLOW')
+        self.req.pop('evidence')
+        self.check()
+
 if __name__=='__main__': unittest.main()
