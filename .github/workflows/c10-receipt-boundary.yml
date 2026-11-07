@@ -1,0 +1,21 @@
+name: C10 experimental receipt boundary regression
+on:
+  push:
+    branches:
+      - 'research/lm-commercial-c10-receipt-boundary-*'
+  pull_request:
+    paths:
+      - 'research/commercial-readiness/C10/**'
+      - '.github/workflows/c10-receipt-boundary.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  c10-synthetic-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run isolated C10 standard-library tests
+        working-directory: research/commercial-readiness/C10
+        run: python3 -m unittest discover -v -p 'test_*.py'
