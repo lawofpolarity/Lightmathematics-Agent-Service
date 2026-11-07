@@ -13,7 +13,7 @@ def verify(request, receipt, *, authenticate, authorize, verify_signature, curre
         required = ('caller', 'operation', 'scope', 'evidence', 'dependency_token')
         if any(not request.get(k) for k in required):
             return denied
-        if any(receipt.get(k) != request[k] for k in ('operation', 'scope', 'dependency_token')):
+        if any(receipt.get(k) != request[k] for k in ('caller', 'operation', 'scope', 'dependency_token')):
             return denied
         if receipt.get('evidence_sha256') != hashlib.sha256(canonical(request['evidence'])).hexdigest():
             return denied
@@ -23,7 +23,7 @@ def verify(request, receipt, *, authenticate, authorize, verify_signature, curre
             return denied
         if not authorize(request['caller'], request['operation'], request['scope']):
             return denied
-        signed = {k: receipt[k] for k in ('operation', 'scope', 'dependency_token', 'evidence_sha256', 'decision', 'canonical_admission')}
+        signed = {k: receipt[k] for k in ('caller', 'operation', 'scope', 'dependency_token', 'evidence_sha256', 'decision', 'canonical_admission')}
         if not verify_signature(canonical(signed), receipt.get('signature')):
             return denied
         if not current(request['dependency_token']):
