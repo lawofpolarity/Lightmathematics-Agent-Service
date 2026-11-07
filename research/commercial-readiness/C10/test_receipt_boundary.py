@@ -37,4 +37,26 @@ class BoundaryTests(unittest.TestCase):
         self.callbacks['verify_signature']=check_payload
         self.check('ALLOW')
 
+
+    def test_truthy_authentication_is_not_authentication(self):
+        for value in (1, 'yes', ['agent-1']):
+            with self.subTest(value=value):
+                self.callbacks['authenticate'] = lambda c, v=value: v
+                self.check()
+    def test_truthy_authorization_is_not_authorization(self):
+        for value in (1, 'authorized', ['read']):
+            with self.subTest(value=value):
+                self.callbacks['authorize'] = lambda c, o, s, v=value: v
+                self.check()
+    def test_truthy_signature_result_is_not_verification(self):
+        for value in (1, 'verified', ['valid']):
+            with self.subTest(value=value):
+                self.callbacks['verify_signature'] = lambda b, s, v=value: v
+                self.check()
+    def test_truthy_currentness_is_not_current(self):
+        for value in (1, 'current', ['v1']):
+            with self.subTest(value=value):
+                self.callbacks['current'] = lambda t, v=value: v
+                self.check('STALE')
+
 if __name__=='__main__': unittest.main()
