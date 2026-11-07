@@ -19,14 +19,14 @@ def verify(request, receipt, *, authenticate, authorize, verify_signature, curre
             return denied
         if receipt.get('decision') != 'ALLOW' or receipt.get('canonical_admission') is not False:
             return denied
-        if not authenticate(request['caller']):
+        if authenticate(request['caller']) is not True:
             return denied
-        if not authorize(request['caller'], request['operation'], request['scope']):
+        if authorize(request['caller'], request['operation'], request['scope']) is not True:
             return denied
         signed = {k: receipt[k] for k in ('caller', 'operation', 'scope', 'dependency_token', 'evidence_sha256', 'decision', 'canonical_admission')}
-        if not verify_signature(canonical(signed), receipt.get('signature')):
+        if verify_signature(canonical(signed), receipt.get('signature')) is not True:
             return denied
-        if not current(request['dependency_token']):
+        if current(request['dependency_token']) is not True:
             return {'decision': 'STALE', 'authenticated_reliance': False}
         return {'decision': 'ALLOW', 'authenticated_reliance': True}
     except Exception:
